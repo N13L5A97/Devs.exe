@@ -36,6 +36,9 @@ footer{
 
 button{
     border: none;
+    background-color: transparent;
+    height: min-content;
+
 }
 
 button:active{
@@ -44,12 +47,32 @@ button:active{
 
 .view{
     background-color: var(--taskbar-color);
-    width: 20em;
-    height: 20em;
+    width: min-content;
+    height: min-content;
+    margin: 3em;
+    padding-bottom: .5em;
 }
 
 .title{
     background-color: var(--title-background-color);
     color: var(--text-color-light);
     height: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+    gap: 3em;
+    font-size: .6rem;
+}
+
+.buttonContainer{
+    margin-bottom: -.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.data{
+    margin: .5em .5em 0 .5em;
+    padding: .5em;
+    background-color: var(--text-color-dark);
+    color: var(--text-color-light);
 }
