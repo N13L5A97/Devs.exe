@@ -5,6 +5,7 @@
 
 
     --taskbar-color: #D9D9D9;
+    --title-background-color: #000080;
 }
 
 *{
@@ -39,4 +40,16 @@ button{
 
 button:active{
     transform: translateY(1px);
+}
+
+.view{
+    background-color: var(--taskbar-color);
+    width: 20em;
+    height: 20em;
+}
+
+.title{
+    background-color: var(--title-background-color);
+    color: var(--text-color-light);
+    height: 1.5rem;
 }
