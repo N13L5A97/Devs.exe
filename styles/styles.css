@@ -51,6 +51,7 @@ button:active{
     height: min-content;
     margin: 3em;
     padding-bottom: .5em;
+    display: none;
 }
 
 .title{
