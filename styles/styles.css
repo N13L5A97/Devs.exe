@@ -16,8 +16,27 @@
 body{
     background-color: var(--background-color);
     color: var(--text-color);
+    height: 100vh;
 }
 
 footer{
+    position: absolute;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: row;
+
+    padding: .5rem;
+    height: 3rem;
+    width: 100vw;
+
     background-color: var(--taskbar-color);
+}
+
+button{
+    border: none;
+}
+
+button:active{
+    transform: translateY(1px);
 }
