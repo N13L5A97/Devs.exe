@@ -11,7 +11,7 @@ const senaData = async () => {
   }
 };
 
-const createElements = async () => {
+const createViewElements = async () => {
   // turn data into json
   const data = await senaData();
 
@@ -28,7 +28,7 @@ const createElements = async () => {
 
   // create h2 element
   const pathName = document.createElement("h2");
-  pathName.innerHTML = `C:\\Windows\\system32\\${data.name}.exe`;
+  pathName.innerHTML = `C:\\Windows\\system32\\${data.firstName}.exe`;
 
   // create div element (buttonContainer)
   const buttonContainer = document.createElement("div");
@@ -87,6 +87,81 @@ const createElements = async () => {
 
   const main = document.querySelector("main");
   main.appendChild(view);
+
+
+  closeButton.addEventListener("click", closeView);
+  fillButton.addEventListener("click", fillView);
+
+
+
 };
 
-createElements();
+const createIcon = async () => {
+  const data = await senaData();
+  console.log(data.avatar_url);
+
+  
+  const imgContainer = document.createElement("article");
+  imgContainer.classList.add("imgContainer");
+  imgContainer.id = data.firstName;
+
+  const avatar = document.createElement("img");
+  avatar.src = data.avatar_url;
+  avatar.alt = "avatar";
+  avatar.classList.add("avatar");
+
+  const fileName = document.createElement('p')
+  fileName.classList.add("fileName")
+  fileName.innerHTML = `${data.firstName}.exe`;
+
+  imgContainer.appendChild(avatar);
+  imgContainer.appendChild(fileName);
+
+  const main = document.querySelector("main");
+  main.appendChild(imgContainer);
+
+
+  document.getElementById("Sena").addEventListener("dblclick", openView);
+
+}
+
+createIcon();
+createViewElements();
+
+
+const openView = async () => {
+  const view = document.querySelector(".view")
+  //make view display auto
+
+  view.style.display = "block";
+}
+
+const closeView = async () => {
+  const view = document.querySelector(".view");
+  view.style.display = "none";
+  console.log("check")
+}
+
+let isFull = false;
+
+const fillView = async () => {
+  const view = document.querySelector(".view");
+
+  if (isFull === false){
+    view.style.width = "100vw";
+    view.style.height = "100vh";
+    view.style.maxWidth = "100vw";
+    view.style.maxHeight = "100vh";
+
+    isFull = true;
+  } else {
+    view.style.width = "50vw";
+    view.style.height = "50vh";
+    view.style.maxWidth = "50vw";
+    view.style.maxHeight = "50vh";
+    isFull = false;
+  }
+
+  console.log(isFull)
+
+}
