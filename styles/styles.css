@@ -70,7 +70,7 @@ button:active{
     align-items: center;
 }
 
-.data{
+.dataContainer{
     margin: .5em .5em 0 .5em;
     padding: .5em;
     background-color: var(--text-color-dark);
