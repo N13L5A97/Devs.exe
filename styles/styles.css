@@ -58,9 +58,6 @@ button:active {
   z-index: 1;
   background-color: var(--taskbar-color);
 
-  max-width: 50%;
-  max-height: 50%;
-
   display: none;
 }
 
@@ -86,7 +83,9 @@ button:active {
   padding: 0.5em;
   background-color: var(--text-color-dark);
   color: var(--text-color-light);
-  height: 89%;
+  height: 50vh;
+  width: 50vw;
+  overflow: scroll;
 }
 
 .imgContainer {
@@ -95,6 +94,7 @@ button:active {
   align-items: center;
   height: 5em;
   width: 5em;
+  margin: 1em;
 
   position: relative;
   padding: 0.2em;

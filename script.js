@@ -1,8 +1,9 @@
+//fetch Sena Data
 const senaData = async () => {
   try {
     const data = await fetch(
-      "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json"
-    ).then((res) => res.json()
+      "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json")
+      .then((res) => res.json()
     );
     // console.log(data);
     return data;
@@ -10,6 +11,27 @@ const senaData = async () => {
     console.error("Error fetching data:", error);
   }
 };
+
+//fetch Niels data
+const nielsData = async () => {
+  try {
+    const data = await fetch ("https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json")
+    .then((res) => res.json());
+    console.log(data)
+    return data;
+  } catch (error){
+    console.error("Error fetching data:", error);
+  }
+}
+
+// this is by copilot 
+// put niels data and sena data in one array
+const combineFunction = async () => {
+  const combinedData = await Promise.all([senaData(), nielsData()]); console.log(combinedData);
+
+}
+
+combineFunction();
 
 const createViewElements = async () => {
   // turn data into json
