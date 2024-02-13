@@ -24,10 +24,13 @@ const nielsData = async () => {
   }
 };
 
+
 const aliData = async () => {
   try {
-    const data = await fetch()
+    const data = await fetch('https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json')
     .then((res) => res.json());
+
+    console.log(data);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -37,7 +40,7 @@ const aliData = async () => {
 // this is by copilot
 // put niels data and sena data in one array
 const combineFunction = async () => {
-  const combinedData = await Promise.all([senaData(), nielsData()]);
+  const combinedData = await Promise.all([senaData(), nielsData(), aliData()]);
 
   // console.log(combinedData);
 
@@ -190,6 +193,8 @@ const createIcon = async () => {
   // console.log(data[1].firstName);
 
   data.forEach((member) => {
+    console.log(member.avatar_url);
+    
     const imgContainer = document.createElement("article");
     imgContainer.classList.add("imgContainer");
     imgContainer.id = member.firstName;
