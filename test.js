@@ -30,6 +30,19 @@ const aliData = async () => {
     const data = await fetch('https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json')
     .then((res) => res.json());
 
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+// fetch Ufuk data
+const ufukData = async () => {
+  try {
+    const data = await fetch('https://raw.githubusercontent.com/h1bba/web-app-from-scratch-2324/main/data/info.json')
+    .then((res) => res.json());
+
     console.log(data);
     return data;
   } catch (error) {
@@ -41,9 +54,9 @@ const aliData = async () => {
 // put members data in one array
 const combineFunction = async () => {
   try{
-    const combinedData = await Promise.all([senaData(), nielsData(), aliData()]);
+    const combinedData = await Promise.all([senaData(), nielsData(), aliData(), ufukData()]);
   
-    // console.log(combinedData);
+    console.log(combinedData);
   
     return combinedData;
   } catch (error){
