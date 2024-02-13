@@ -126,6 +126,13 @@ const createViewElements = async () => {
       view.style.display = "none";
     });
 
+    // when view is clicked bring to front
+    view.addEventListener("click", () => {
+      //z index + 1
+      view.style.zIndex++;
+    });
+
+
     // when fill button is pressed fill the right view
     let isFull = false;
 
