@@ -38,7 +38,7 @@ const aliData = async () => {
 };
 
 // this is by copilot
-// put niels data and sena data in one array
+// put members data in one array
 const combineFunction = async () => {
   try{
     const combinedData = await Promise.all([senaData(), nielsData(), aliData()]);
