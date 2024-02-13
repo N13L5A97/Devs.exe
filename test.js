@@ -29,14 +29,14 @@ const nielsData = async () => {
 const combineFunction = async () => {
   const combinedData = await Promise.all([senaData(), nielsData()]);
 
-  console.log(combinedData);
+  // console.log(combinedData);
 
   return combinedData;
 };
 
 const createViewElements = async () => {
   const data = await combineFunction();
-  console.log(data);
+  // console.log(data);
 
   data.forEach((member) => {
     const dataString = JSON.stringify(member, null, 2);
@@ -112,6 +112,14 @@ const createViewElements = async () => {
     const main = document.querySelector("main");
     main.appendChild(view);
 
+    //give view random position
+
+    const randomLeft = Math.floor(Math.random() * 49);
+    const randomTop = Math.floor(Math.random() *38);
+
+    view.style.left = `${randomLeft}%`;
+    view.style.top = `${randomTop}%`;
+
     // when close button pressed close the right view
     //little help from copilot
     closeButton.addEventListener("click", () => {
@@ -125,7 +133,9 @@ const createViewElements = async () => {
       if (isFull === false) {
         //find the right view and dataContainer
         const view = document.getElementById(member.firstName);
-        const dataContainer = document.getElementById(member.firstName).querySelector(".dataContainer");
+        const dataContainer = document
+          .getElementById(member.firstName)
+          .querySelector(".dataContainer");
 
         isFull = true;
         console.log(isFull);
@@ -134,20 +144,25 @@ const createViewElements = async () => {
         dataContainer.style.width = "99vw";
         view.style.left = "0";
         view.style.top = "0";
-        console.log(member.firstName);
+        // console.log(member.firstName);
       } else {
         //find the right view and dataContainer
         const view = document.getElementById(member.firstName);
-        const dataContainer = document.getElementById(member.firstName).querySelector(".dataContainer");
-
+        const dataContainer = document
+          .getElementById(member.firstName)
+          .querySelector(".dataContainer");
 
         isFull = false;
         console.log(isFull);
 
         dataContainer.style.height = "50vh";
         dataContainer.style.width = "50vw";
-        view.style.left = "20%";
-        view.style.top = "20%";
+
+        const randomLeft = Math.floor(Math.random() * 49);
+        const randomTop = Math.floor(Math.random() * 38);
+
+        view.style.left = `${randomLeft}%`;
+        view.style.top = `${randomTop}%`;
       }
     });
   });
@@ -155,7 +170,7 @@ const createViewElements = async () => {
 
 const createIcon = async () => {
   const data = await combineFunction();
-  console.log(data[1].firstName);
+  // console.log(data[1].firstName);
 
   data.forEach((member) => {
     const imgContainer = document.createElement("article");
@@ -177,10 +192,27 @@ const createIcon = async () => {
     const main = document.querySelector("main");
     main.appendChild(imgContainer);
 
+    //random position for the icon
+    // little help from copilot
+    const randomLeft = Math.floor(Math.random() * 75);
+    const randomTop = Math.floor(Math.random() * 75);
+
+    imgContainer.style.left = `${randomLeft}%`;
+    imgContainer.style.top = `${randomTop}%`;
+
+    const startButton = document.querySelector("#startButton");
+    startButton.addEventListener("click", () => {
+      const randomLeft = Math.floor(Math.random() * 75);
+      const randomTop = Math.floor(Math.random() * 75);
+
+      imgContainer.style.left = `${randomLeft}%`;
+      imgContainer.style.top = `${randomTop}%`;
+    });
+
     //when icon is double clicked open the right view
     // little help from copilot
     imgContainer.addEventListener("dblclick", () => {
-      console.log(imgContainer.id);
+      // console.log(imgContainer.id);
       const view = document.getElementById(imgContainer.id);
       view.style.display = "block";
     });
