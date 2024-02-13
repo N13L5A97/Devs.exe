@@ -51,6 +51,8 @@ const combineFunction = async () => {
   }
 };
 
+let z = 1;
+
 const createViewElements = async () => {
   try{
     const data = await combineFunction();
@@ -147,7 +149,8 @@ const createViewElements = async () => {
       // when view is clicked bring to front
       view.addEventListener("click", () => {
         //z index + 1
-        view.style.zIndex++;
+        view.style.zIndex = z;
+        z++;
       });
   
   
@@ -246,6 +249,9 @@ const createIcon = async () => {
         // console.log(imgContainer.id);
         const view = document.getElementById(imgContainer.id);
         view.style.display = "block";
+        view.style.zIndex = z;
+        z++;
+        
       });
     });
   } catch (error){
