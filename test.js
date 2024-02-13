@@ -24,6 +24,16 @@ const nielsData = async () => {
   }
 };
 
+const aliData = async () => {
+  try {
+    const data = await fetch()
+    .then((res) => res.json());
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
 // this is by copilot
 // put niels data and sena data in one array
 const combineFunction = async () => {
