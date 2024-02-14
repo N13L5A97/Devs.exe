@@ -255,6 +255,17 @@ const createIcon = async () => {
         });
       }
     });
+
+    const startButton = document.querySelector("#startButton");
+    startButton.addEventListener("click", () => {
+
+      console.log("start button is clicked")
+      const randomLeft = Math.floor(Math.random() * 75);
+      const randomTop = Math.floor(Math.random() * 75);
+
+      imgContainer.style.left = `${randomLeft}%`;
+      imgContainer.style.top = `${randomTop}%`;
+    });
   });
 };
 
