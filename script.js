@@ -1,4 +1,27 @@
-//fetch Sena Data
+function updateDateTime() {
+  console.log('test')
+  const now = new Date();
+
+  // Update time
+  //padstart zorgt er voor dat er 2 getallen komen te staan, bijvoorbeeld niet de /2/ maand maar /02/
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const timeString = `${hours}:${minutes}`;
+  document.getElementById('time').textContent = timeString;
+
+  // Update date
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const dateString = now.toLocaleDateString('en-NL', options);
+  document.getElementById('date').textContent = dateString;
+}
+
+// Update date and time every second
+setInterval(updateDateTime, 1000);
+
+// Initial update
+updateDateTime();
+
+// fetch Sena Data
 const senaData = async () => {
   try {
     const data = await fetch(
@@ -11,7 +34,7 @@ const senaData = async () => {
   }
 };
 
-//fetch Sena Data
+// fetch Fayaaz Data
 const fayaazData = async () => {
   try {
     const data = await fetch(
@@ -24,7 +47,7 @@ const fayaazData = async () => {
   }
 };
 
-//fetch Niels data
+// fetch Niels data
 const nielsData = async () => {
   try {
     const data = await fetch(
@@ -77,7 +100,6 @@ const combineFunction = async () => {
   }
 };
 
-let z = 1;
 
 const createViewElements = async () => {
   try {
@@ -87,20 +109,18 @@ const createViewElements = async () => {
     data.forEach((member) => {
       const dataString = JSON.stringify(member, null, 2);
 
-      // create section element (view)
+      // Creating elements...
       const view = document.createElement("section");
       view.classList.add("view");
       view.id = member.firstName;
 
-      // create section element (title)
+      // Adding classes...
       const title = document.createElement("section");
       title.classList.add("title");
 
-      // create h2 element
       const pathName = document.createElement("h2");
       pathName.innerHTML = `C:\\Windows\\system32\\${member.firstName}.exe`;
 
-      // create div element (buttonContainer)
       const buttonContainer = document.createElement("div");
       buttonContainer.classList.add("buttonContainer");
 
@@ -113,41 +133,33 @@ const createViewElements = async () => {
       //create button (closeButton)
       const closeButton = document.createElement("button");
 
-      //create image (minusImage)
       const minusImage = document.createElement("img");
       minusImage.src = "./assets/minButton.png";
       minusImage.alt = "minus button";
 
-      //create image (fillImage)
       const fillImage = document.createElement("img");
       fillImage.src = "./assets/fillButton.png";
       fillImage.alt = "fill button";
 
-      //create image (closeImage)
       const closeImage = document.createElement("img");
       closeImage.src = "./assets/closeButton.png";
       closeImage.alt = "close button";
 
-      // create article element (dataContainer)
       const dataContainer = document.createElement("article");
       dataContainer.classList.add("dataContainer");
 
       const userData = document.createElement("pre");
       userData.innerHTML = dataString;
 
-      //put image in buttons
       minusButton.appendChild(minusImage);
       fillButton.appendChild(fillImage);
       closeButton.appendChild(closeImage);
 
-      //put userData in dataContainer
       dataContainer.appendChild(userData);
 
-      //put pathname and buttons in title
       title.appendChild(pathName);
       title.appendChild(buttonContainer);
 
-      //put buttons in button container
       buttonContainer.appendChild(minusButton);
       buttonContainer.appendChild(fillButton);
       buttonContainer.appendChild(closeButton);
@@ -166,21 +178,14 @@ const createViewElements = async () => {
       view.style.left = `${randomLeft}%`;
       view.style.top = `${randomTop}%`;
 
-      // when close button pressed close the right view
-      //little help from copilot
       closeButton.addEventListener("click", () => {
         view.style.display = "none";
       });
 
-      // when view is clicked bring to front
       view.addEventListener("click", () => {
-        //z index + 1
-        view.style.zIndex = z;
-        z++;
+        view.style.zIndex++;
       });
 
-
-      // when fill button is pressed fill the right view
       let isFull = false;
 
       fillButton.addEventListener("click", () => {
@@ -228,7 +233,6 @@ const createViewElements = async () => {
 const createIcon = async () => {
   try {
     const data = await combineFunction();
-    // console.log(data[1].firstName);
 
     data.forEach((member) => {
       console.log(member.avatar_url);
@@ -252,8 +256,6 @@ const createIcon = async () => {
       const main = document.querySelector("main");
       main.appendChild(imgContainer);
 
-      //random position for the icon
-      // little help from copilot
       const randomLeft = Math.floor(Math.random() * 75);
       const randomTop = Math.floor(Math.random() * 75);
 
@@ -280,13 +282,10 @@ const createIcon = async () => {
 
           }
         });
-        imgContainer.style.backgroundColor = "#00007b";
-        imgContainer.style.border = "dashed 1px white";
-        fileName.style.backgroundColor = "#00007b";
-        fileName.style.color = "white";
+        imgContainer.classList.add("active");
+
       });
 
-      // Event listener added for double clicking
       imgContainer.addEventListener("dblclick", (event) => {
         event.stopPropagation();
 
@@ -297,11 +296,9 @@ const createIcon = async () => {
         if (view.style.display !== "block") {
           view.style.display = "block";
 
-          // When the window is closed, set the background of the imgContainer back to transparent
           view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
-            imgContainer.style.backgroundColor = "transparent";
-            fileName.style.backgroundColor = "transparent";
-            fileName.style.color = "black";
+            imgContainer.classList.remove("fullScreen");
+            imgContainer.querySelector(".fileName").classList.add("fileName");
           });
         }
       });
@@ -314,7 +311,6 @@ const createIcon = async () => {
         view.style.display = "block";
         view.style.zIndex = z;
         z++;
-
       });
     });
   } catch (error) {
@@ -322,28 +318,6 @@ const createIcon = async () => {
   }
 };
 
-
 createViewElements();
+
 createIcon();
-
-function updateDateTime() {
-  const now = new Date();
-
-  // Update time
-  //padstart zorgt er voor dat er 2 getallen komen te staan, bijvoorbeeld niet de /2/ maand maar /02/
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const timeString = `${hours}:${minutes}`;
-  document.getElementById('time').textContent = timeString;
-
-  // Update date
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  const dateString = now.toLocaleDateString('en-NL', options);
-  document.getElementById('date').textContent = dateString;
-}
-
-// Update date and time every second
-setInterval(updateDateTime, 1000);
-
-// Initial update
-updateDateTime();
