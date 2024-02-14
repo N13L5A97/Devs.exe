@@ -29,12 +29,13 @@ body {
   overflow: hidden;
 }
 
-main{
-    width: 100vw;
-    height: 100vh;
+main {
+  width: 100vw;
+  height: 100vh;
 }
 
 footer {
+  justify-content: space-between;
   position: absolute;
   bottom: 0;
   z-index: 10;
@@ -129,4 +130,18 @@ button:active {
 
 pre {
   overflow: scroll;
+}
+
+footer>section {
+  align-items: ce;
+  font-size: 14px;
+  padding: 0.2em;
+  box-shadow:
+    -0.5px -0.5px 0 0.5px #0a0a0a,
+    0 0 0 1px #808080,
+    -0.5px -0.5px 0 1.5px #ffffff,
+    0 0 0 2px #0a0a0a;
+  text-align: center;
+  box-shadow: -2px -2px 0px 0px #808080, 2px 2px 0px 0px white;
+
 }

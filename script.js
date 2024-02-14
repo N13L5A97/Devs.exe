@@ -158,7 +158,6 @@ const createViewElements = async () => {
       const main = document.querySelector("main");
       main.appendChild(view);
 
-
       //give view random position
 
       const randomLeft = Math.floor(Math.random() * 49);
@@ -252,7 +251,6 @@ const createIcon = async () => {
 
       const main = document.querySelector("main");
       main.appendChild(imgContainer);
-      dragElement(imgContainer);
 
       //random position for the icon
       // little help from copilot
@@ -303,9 +301,7 @@ const createIcon = async () => {
           view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
             imgContainer.style.backgroundColor = "transparent";
             fileName.style.backgroundColor = "transparent";
-            fileName.style.color = "black"
-              ;
-
+            fileName.style.color = "black";
           });
         }
       });
@@ -329,41 +325,24 @@ const createIcon = async () => {
 
 createViewElements();
 createIcon();
-// Select the entire document
 
+function updateDateTime() {
+  const now = new Date();
 
+  // Update time
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const timeString = `${hours}:${minutes}`;
+  document.getElementById('time').textContent = timeString;
 
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-  elmnt.onmousedown = dragMouseDown;
-
-  function dragMouseDown(e) {
-    // e = e || window.event;
-    e.preventDefault();
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    console.log(e)
-    // calculate the new cursor position:
-    pos1 = e.clientX - pos3;
-    pos2 = e.clientY - pos4;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop + pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft + pos1) + "px";
-  }
-
-  function closeDragElement() {
-    // stop moving when the mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
+  // Update date
+  const options = {year: 'numeric', month: 'numeric', day: 'numeric' };
+  const dateString = now.toLocaleDateString('en-NL', options);
+  document.getElementById('date').textContent = dateString;
 }
+
+// Update date and time every second
+setInterval(updateDateTime, 1000);
+
+// Initial update
+updateDateTime();
