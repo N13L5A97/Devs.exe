@@ -77,6 +77,7 @@ const combineFunction = async () => {
   }
 };
 
+let z = 1;
 
 const createViewElements = async () => {
   const data = await combineFunction();
@@ -151,23 +152,42 @@ const createViewElements = async () => {
     });
 
     view.addEventListener("click", () => {
-      view.style.zIndex++;
+      view.style.zIndex = z;
+      z++;
     });
 
     let isFull = false;
 
     fillButton.addEventListener("click", () => {
-      const view = document.getElementById(member.firstName);
-      const dataContainer = view.querySelector(".dataContainer");
-
       if (isFull === false) {
+        //find the right view and dataContainer
+        const view = document.getElementById(member.firstName);
+        const dataContainer = document
+          .getElementById(member.firstName)
+          .querySelector(".dataContainer");
+
         isFull = true;
-        dataContainer.classList.add("fullScreen");
-        view.classList.add("fullScreen");
+        console.log(isFull);
+
+        dataContainer.style.height = "100vh";
+        dataContainer.style.width = "99vw";
+        view.style.left = "0";
+        view.style.top = "0";
+        view.style.zIndex = z;
+        z++;
+        // console.log(member.firstName);
       } else {
+        //find the right view and dataContainer
+        const view = document.getElementById(member.firstName);
+        const dataContainer = document
+          .getElementById(member.firstName)
+          .querySelector(".dataContainer");
+
         isFull = false;
-        dataContainer.classList.remove("fullScreen");
-        view.classList.remove("fullScreen");
+        console.log(isFull);
+
+        dataContainer.style.height = "50vh";
+        dataContainer.style.width = "50vw";
 
         const randomLeft = Math.floor(Math.random() * 49);
         const randomTop = Math.floor(Math.random() * 38);
@@ -221,10 +241,11 @@ const createIcon = async () => {
     });
 
     imgContainer.addEventListener("dblclick", (event) => {
-      event.stopPropagation(); 
 
       const viewId = imgContainer.id;
       const view = document.getElementById(viewId);
+      view.style.zIndex = z;
+      z++;
 
       if (view.style.display !== "block") {
         view.style.display = "block";
