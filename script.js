@@ -3,15 +3,15 @@ function updateDateTime() {
 
   // Update time
   //padstart zorgt er voor dat er 2 getallen komen te staan, bijvoorbeeld niet de /2/ maand maar /02/
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const hours = now.getHours().toString().padStart(2, "0");
+  const minutes = now.getMinutes().toString().padStart(2, "0");
   const timeString = `${hours}:${minutes}`;
-  document.getElementById('time').textContent = timeString;
+  document.getElementById("time").textContent = timeString;
 
   // Update date
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  const dateString = now.toLocaleDateString('en-NL', options);
-  document.getElementById('date').textContent = dateString;
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  const dateString = now.toLocaleDateString("en-NL", options);
+  document.getElementById("date").textContent = dateString;
 }
 
 // Update date and time every second
@@ -24,7 +24,7 @@ updateDateTime();
 const senaData = async () => {
   try {
     const data = await fetch(
-        "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json"
+      "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json"
     ).then((res) => res.json());
     // console.log(data);
     return data;
@@ -37,7 +37,7 @@ const senaData = async () => {
 const fayaazData = async () => {
   try {
     const data = await fetch(
-        "https://raw.githubusercontent.com/Fayaaz036/WAPS/master/data.json"
+      "https://raw.githubusercontent.com/Fayaaz036/WAPS/master/data.json"
     ).then((res) => res.json());
     // console.log(data);
     return data;
@@ -50,7 +50,7 @@ const fayaazData = async () => {
 const nielsData = async () => {
   try {
     const data = await fetch(
-        "https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json"
+      "https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json"
     ).then((res) => res.json());
     // console.log(data)
     return data;
@@ -62,8 +62,9 @@ const nielsData = async () => {
 // fetch Ali data
 const aliData = async () => {
   try {
-    const data = await fetch('https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json')
-        .then((res) => res.json());
+    const data = await fetch(
+      "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json"
+    ).then((res) => res.json());
 
     // console.log(data);
     return data;
@@ -75,8 +76,9 @@ const aliData = async () => {
 // fetch Ufuk data
 const ufukData = async () => {
   try {
-    const data = await fetch('https://raw.githubusercontent.com/h1bba/web-app-from-scratch-2324/main/data/info.json')
-        .then((res) => res.json());
+    const data = await fetch(
+      "https://raw.githubusercontent.com/h1bba/web-app-from-scratch-2324/main/data/info.json"
+    ).then((res) => res.json());
 
     console.log(data);
     return data;
@@ -88,13 +90,19 @@ const ufukData = async () => {
 // this is by copilot
 // put members data in one array
 const combineFunction = async () => {
-  try{
-    const combinedData = await Promise.all([senaData(), nielsData(), aliData(), ufukData(), fayaazData()]);
+  try {
+    const combinedData = await Promise.all([
+      senaData(),
+      nielsData(),
+      aliData(),
+      ufukData(),
+      fayaazData(),
+    ]);
 
     console.log(combinedData);
 
     return combinedData;
-  } catch (error){
+  } catch (error) {
     console.error("Error combining data:", error);
   }
 };
@@ -182,37 +190,37 @@ const createViewElements = async () => {
         view.style.display = "none";
       });
 
-    view.addEventListener("click", () => {
-      view.style.zIndex = z;
-      z++;
-    });
+      view.addEventListener("click", () => {
+        view.style.zIndex = z;
+        z++;
+      });
 
       let isFull = false;
 
-    fillButton.addEventListener("click", () => {
-      if (isFull === false) {
-        //find the right view and dataContainer
-        const view = document.getElementById(member.firstName);
-        const dataContainer = document
-          .getElementById(member.firstName)
-          .querySelector(".dataContainer");
+      fillButton.addEventListener("click", () => {
+        if (isFull === false) {
+          //find the right view and dataContainer
+          const view = document.getElementById(member.firstName);
+          const dataContainer = document
+            .getElementById(member.firstName)
+            .querySelector(".dataContainer");
 
-        isFull = true;
-        console.log(isFull);
+          isFull = true;
+          console.log(isFull);
 
-        dataContainer.style.height = "100vh";
-        dataContainer.style.width = "99vw";
-        view.style.left = "0";
-        view.style.top = "0";
-        view.style.zIndex = z;
-        z++;
-        // console.log(member.firstName);
-      } else {
-        //find the right view and dataContainer
-        const view = document.getElementById(member.firstName);
-        const dataContainer = document
-          .getElementById(member.firstName)
-          .querySelector(".dataContainer");
+          dataContainer.style.height = "100vh";
+          dataContainer.style.width = "99vw";
+          view.style.left = "0";
+          view.style.top = "0";
+          view.style.zIndex = z;
+          z++;
+          // console.log(member.firstName);
+        } else {
+          //find the right view and dataContainer
+          const view = document.getElementById(member.firstName);
+          const dataContainer = document
+            .getElementById(member.firstName)
+            .querySelector(".dataContainer");
 
           isFull = false;
           console.log(isFull);
@@ -265,58 +273,37 @@ const createIcon = async () => {
       imgContainer.style.left = `${randomLeft}%`;
       imgContainer.style.top = `${randomTop}%`;
 
+      imgContainer.addEventListener("dblclick", (event) => {
+        const viewId = imgContainer.id;
+        const view = document.querySelector(".view").getElementById(viewId);
+        view.style.zIndex = z;
+        z++;
+
+        // See if the window is already open, if not, open it
+        if (view.style.display !== "block") {
+          view.style.display = "block";
+
+          view
+            .querySelector(".buttonContainer button:last-child")
+            .addEventListener("click", () => {
+              imgContainer.classList.remove("fullScreen");
+            });
+        }
+      });
+
       const startButton = document.querySelector("#startButton");
       startButton.addEventListener("click", () => {
+        console.log("start button is clicked");
         const randomLeft = Math.floor(Math.random() * 75);
         const randomTop = Math.floor(Math.random() * 75);
 
         imgContainer.style.left = `${randomLeft}%`;
         imgContainer.style.top = `${randomTop}%`;
       });
-      // Ali's added function 
-      imgContainer.addEventListener("click", () => {
-        const selectedContainers = document.querySelectorAll(".imgContainer");
-        selectedContainers.forEach(container => {
-          if (container !== imgContainer) {
-            container.style.backgroundColor = "transparent";
-            container.style.border = "transparent";
-            fileName.style.color = "black"
-            fileName.backgroundColor = "transparent"
-
-          }
-        });
-        imgContainer.classList.add("active");
-
-      });
-
-    imgContainer.addEventListener("dblclick", (event) => {
-
-      const viewId = imgContainer.id;
-      const view = document.querySelector(".view").getElementById(viewId);
-      view.style.zIndex = z;
-      z++;
-
-        // See if the window is already open, if not, open it
-        if (view.style.display !== "block") {
-          view.style.display = "block";
-
-        view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
-          imgContainer.classList.remove("fullScreen");
-        });
-      }
     });
-
-    const startButton = document.querySelector("#startButton");
-    startButton.addEventListener("click", () => {
-
-      console.log("start button is clicked")
-      const randomLeft = Math.floor(Math.random() * 75);
-      const randomTop = Math.floor(Math.random() * 75);
-
-      imgContainer.style.left = `${randomLeft}%`;
-      imgContainer.style.top = `${randomTop}%`;
-    });
-  });
+  } catch (error) {
+    console.error("Error creating icon:", error);
+  }
 };
 
 createViewElements();
