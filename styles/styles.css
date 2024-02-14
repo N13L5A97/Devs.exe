@@ -117,7 +117,3 @@ button:active {
 .avatar {
   height: 100%;
 }
-
-pre {
-  overflow: scroll;
-}
