@@ -313,9 +313,9 @@ const createIcon = async () => {
       imgContainer.addEventListener("dblclick", () => {
         // console.log(imgContainer.id);
         const view = document.getElementById(imgContainer.id);
-        view.style.display = "block";
-        view.style.zIndex = z;
-        z++;
+          view.style.display = "block";
+          view.style.zIndex = z;
+          z++;
 
       });
     });
