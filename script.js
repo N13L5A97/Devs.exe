@@ -2,7 +2,7 @@
 const senaData = async () => {
   try {
     const data = await fetch(
-        "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json"
+      "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json"
     ).then((res) => res.json());
     // console.log(data);
     return data;
@@ -15,7 +15,7 @@ const senaData = async () => {
 const fayaazData = async () => {
   try {
     const data = await fetch(
-        "https://raw.githubusercontent.com/Fayaaz036/WAPS/master/data.json"
+      "https://raw.githubusercontent.com/Fayaaz036/WAPS/master/data.json"
     ).then((res) => res.json());
     // console.log(data);
     return data;
@@ -28,7 +28,7 @@ const fayaazData = async () => {
 const nielsData = async () => {
   try {
     const data = await fetch(
-        "https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json"
+      "https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json"
     ).then((res) => res.json());
     // console.log(data)
     return data;
@@ -41,7 +41,7 @@ const nielsData = async () => {
 const aliData = async () => {
   try {
     const data = await fetch('https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json')
-        .then((res) => res.json());
+      .then((res) => res.json());
 
     // console.log(data);
     return data;
@@ -54,7 +54,7 @@ const aliData = async () => {
 const ufukData = async () => {
   try {
     const data = await fetch('https://raw.githubusercontent.com/h1bba/web-app-from-scratch-2324/main/data/info.json')
-        .then((res) => res.json());
+      .then((res) => res.json());
 
     console.log(data);
     return data;
@@ -66,13 +66,13 @@ const ufukData = async () => {
 // this is by copilot
 // put members data in one array
 const combineFunction = async () => {
-  try{
+  try {
     const combinedData = await Promise.all([senaData(), nielsData(), aliData(), ufukData(), fayaazData()]);
 
     console.log(combinedData);
 
     return combinedData;
-  } catch (error){
+  } catch (error) {
     console.error("Error combining data:", error);
   }
 };
@@ -80,7 +80,7 @@ const combineFunction = async () => {
 let z = 1;
 
 const createViewElements = async () => {
-  try{
+  try {
     const data = await combineFunction();
     // console.log(data);
 
@@ -158,10 +158,11 @@ const createViewElements = async () => {
       const main = document.querySelector("main");
       main.appendChild(view);
 
+
       //give view random position
 
       const randomLeft = Math.floor(Math.random() * 49);
-      const randomTop = Math.floor(Math.random() *38);
+      const randomTop = Math.floor(Math.random() * 38);
 
       view.style.left = `${randomLeft}%`;
       view.style.top = `${randomTop}%`;
@@ -188,8 +189,8 @@ const createViewElements = async () => {
           //find the right view and dataContainer
           const view = document.getElementById(member.firstName);
           const dataContainer = document
-              .getElementById(member.firstName)
-              .querySelector(".dataContainer");
+            .getElementById(member.firstName)
+            .querySelector(".dataContainer");
 
           isFull = true;
           console.log(isFull);
@@ -203,8 +204,8 @@ const createViewElements = async () => {
           //find the right view and dataContainer
           const view = document.getElementById(member.firstName);
           const dataContainer = document
-              .getElementById(member.firstName)
-              .querySelector(".dataContainer");
+            .getElementById(member.firstName)
+            .querySelector(".dataContainer");
 
           isFull = false;
           console.log(isFull);
@@ -220,13 +221,13 @@ const createViewElements = async () => {
         }
       });
     });
-  } catch (error){
+  } catch (error) {
     console.error("Error creating view elements:", error);
   }
 };
 
 const createIcon = async () => {
-  try{
+  try {
     const data = await combineFunction();
     // console.log(data[1].firstName);
 
@@ -251,6 +252,7 @@ const createIcon = async () => {
 
       const main = document.querySelector("main");
       main.appendChild(imgContainer);
+      dragElement(imgContainer);
 
       //random position for the icon
       // little help from copilot
@@ -268,45 +270,45 @@ const createIcon = async () => {
         imgContainer.style.left = `${randomLeft}%`;
         imgContainer.style.top = `${randomTop}%`;
       });
-        // Ali's added function 
-    imgContainer.addEventListener("click", () => {
-      const selectedContainers = document.querySelectorAll(".imgContainer");
-      selectedContainers.forEach(container => {
-        if (container !== imgContainer) {
-          container.style.backgroundColor = "transparent";
-          container.style.border = "transparent";
-          fileName.style.color = "black"
-          fileName.backgroundColor = "transparent"
+      // Ali's added function 
+      imgContainer.addEventListener("click", () => {
+        const selectedContainers = document.querySelectorAll(".imgContainer");
+        selectedContainers.forEach(container => {
+          if (container !== imgContainer) {
+            container.style.backgroundColor = "transparent";
+            container.style.border = "transparent";
+            fileName.style.color = "black"
+            fileName.backgroundColor = "transparent"
 
+          }
+        });
+        imgContainer.style.backgroundColor = "#00007b";
+        imgContainer.style.border = "dashed 1px white";
+        fileName.style.backgroundColor = "#00007b";
+        fileName.style.color = "white";
+      });
+
+      // Event listener added for double clicking
+      imgContainer.addEventListener("dblclick", (event) => {
+        event.stopPropagation();
+
+        const viewId = imgContainer.id;
+        const view = document.getElementById(viewId);
+
+        // See if the window is already open, if not, open it
+        if (view.style.display !== "block") {
+          view.style.display = "block";
+
+          // When the window is closed, set the background of the imgContainer back to transparent
+          view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
+            imgContainer.style.backgroundColor = "transparent";
+            fileName.style.backgroundColor = "transparent";
+            fileName.style.color = "black"
+              ;
+
+          });
         }
       });
-      imgContainer.style.backgroundColor = "#00007b";
-      imgContainer.style.border = "dashed 1px white";
-      fileName.style.backgroundColor = "#00007b";
-      fileName.style.color = "white";
-    });
-
-    // Event listener added for double clicking
-    imgContainer.addEventListener("dblclick", (event) => {
-      event.stopPropagation(); 
-
-      const viewId = imgContainer.id;
-      const view = document.getElementById(viewId);
-
-      // See if the window is already open, if not, open it
-      if (view.style.display !== "block") {
-        view.style.display = "block";
-
-        // When the window is closed, set the background of the imgContainer back to transparent
-        view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
-          imgContainer.style.backgroundColor = "transparent";
-          fileName.style.backgroundColor = "transparent";
-          fileName.style.color = "black"
-        ;
-
-        });
-      }
-    });
 
       //when icon is double clicked open the right view
       // little help from copilot
@@ -319,7 +321,7 @@ const createIcon = async () => {
 
       });
     });
-  } catch (error){
+  } catch (error) {
     console.error("Error creating icon:", error);
   }
 };
@@ -327,3 +329,41 @@ const createIcon = async () => {
 
 createViewElements();
 createIcon();
+// Select the entire document
+
+
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  elmnt.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    // e = e || window.event;
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    console.log(e)
+    // calculate the new cursor position:
+    pos1 = e.clientX - pos3;
+    pos2 = e.clientY - pos4;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop + pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft + pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when the mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
