@@ -1,0 +1,38 @@
+{
+    "cards": [
+        {
+            "name": "Ali Ahmed",
+            "age": 23,
+            "bio": "I'm Ali Ahmed, 23 years old. I'm from Egypt but was born and raised in the Netherlands. With a background in design, I'm now eager to delve more into the technical side.",
+            "avatar": "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/memoji.png",
+            "socials": { 
+               "discord": "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/icon-discord.svg", 
+               "github": "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/github-icon.svg", 
+               "linkedin":"https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/icon-linkedin.svg"
+                        }
+            },
+         
+         {
+            "title": "Skills",
+            "bio": "I'm quite proficient with these software tools. I often combine them while working, as they complement each other well.",
+            "avatar": "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/skills.png",
+            "icons": ["https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/adobe_photoshop.svg", 
+                     "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/adobe_illustrator.svg", "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/figma.svg", 
+                     "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/HTML_logo-01.svg", 
+                     "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/CSS-icon.svg", "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/JS_logo.svg"]
+         },
+         {
+            "title": "Hobbies",
+            "bio": "You're probably familiar with the classic saying: 'Turn your hobby into your job.' I often immerse myself in HTML/CSS and enjoy crafting engaging websites.",
+            "avatar": "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/hobbies.png"
+         },
+         {
+            "id": "4",
+            "title": "Fun Facts",
+            "avatar": "https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/content/feitjes.png"
+         }
+
+
+    ]
+    
+}
