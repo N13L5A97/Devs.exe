@@ -77,6 +77,8 @@ const combineFunction = async () => {
   }
 };
 
+let z = 1;
+
 const createViewElements = async () => {
   const data = await combineFunction();
 
@@ -150,7 +152,8 @@ const createViewElements = async () => {
     });
 
     view.addEventListener("click", () => {
-      view.style.zIndex++;
+      view.style.zIndex = z;
+      z++;
     });
 
     let isFull = false;
@@ -161,8 +164,15 @@ const createViewElements = async () => {
 
       if (isFull === false) {
         isFull = true;
-        dataContainer.classList.add("fullScreen");
-        view.classList.add("fullScreen");
+        console.log(isFull);
+
+        dataContainer.style.height = "100vh";
+        dataContainer.style.width = "99vw";
+        view.style.left = "0";
+        view.style.top = "0";
+        view.style.zIndex = z;
+        z++;
+        // console.log(member.firstName);
       } else {
         isFull = false;
         dataContainer.classList.remove("fullScreen");
@@ -220,17 +230,17 @@ const createIcon = async () => {
     });
 
     imgContainer.addEventListener("dblclick", (event) => {
-      event.stopPropagation(); 
 
       const viewId = imgContainer.id;
       const view = document.getElementById(viewId);
+      view.style.zIndex = z;
+      z++;
 
       if (view.style.display !== "block") {
         view.style.display = "block";
 
         view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
           imgContainer.classList.remove("fullScreen");
-          imgContainer.querySelector(".fileName").classList.add("fileName");
         });
       }
     });
