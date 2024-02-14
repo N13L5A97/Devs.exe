@@ -172,7 +172,10 @@ const createViewElements = async () => {
       // when close button pressed close the right view
       //little help from copilot
       closeButton.addEventListener("click", () => {
+        const button = document.querySelector( '[data-id="' + view.id + '"]');
+        button.remove();
         view.style.display = "none";
+
       });
 
       // when view is clicked bring to front
@@ -296,30 +299,75 @@ const createIcon = async () => {
 
         const viewId = imgContainer.id;
         const view = document.getElementById(viewId);
-        const minimize = document.querySelector(".minimize");
-        const minimizetext = document.querySelector(".minimizetext");
-        const minimizepic = document.querySelector("img#avatarminimize");
-        minimize.style.display ="flex";
-        minimizepic.src = `${member.avatar_url}`;
-        minimizetext.innerHTML =` ${member.firstName}.exe`;
+
+        const footer = document.querySelector("footer");
+        const button = document.createElement("button");
+
+        const avatar = imgContainer.querySelector("img");
+        const miniavatar = document.createElement("img");
+        miniavatar.src = avatar.src;
+console.log(miniavatar);
+
+
+
+        button.dataset.id = viewId;
+        button.textContent = viewId;
+        button.appendChild(miniavatar);
+        button.classList.add("minimize");
+
+        button.addEventListener("click", () => {
+          toggleDialog();
+        });
+        footer.appendChild(button);
+
+
+
+
+
+        //minimize word hier aangeroepen en ingevuld met data.
+        // const minimize = document.querySelector(".minimize");
+        // const minimizetext = document.querySelector(".minimizetext");
+        // const minimizepic = document.querySelector("img#avatarminimize");
+        // minimize.style.display ="flex";
+        // minimizepic.src = `${member.avatar_url}`;
+        // minimizetext.innerHTML =` ${member.firstName}.exe`;
+
 
         // See if the window is already open, if not, open it
-        if (view.style.display !== "block") {
-          view.style.display = "block";
-          // When the window is closed, set the background of the imgContainer back to transparent
-          view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
-            imgContainer.style.backgroundColor = "transparent";
-            fileName.style.backgroundColor = "transparent";
-            fileName.style.color = "black"
-            minimize.style.display ="none";
-          });
+        toggleDialog();
+
+        function toggleDialog() {
+          console.log(view);
+
+          if (view.style.display !== "block") {
+            const degeneDieNuBovenopLigt = document.querySelector(".bovenop");
+            if(degeneDieNuBovenopLigt) {
+              degeneDieNuBovenopLigt.classList.remove("bovenop");
+            }
+
+            view.classList.add("bovenop");
+
+
+            view.style.display = "block";
+            // When the window is closed, set the background of the imgContainer back to transparent
+            view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
+              imgContainer.style.backgroundColor = "transparent";
+              fileName.style.backgroundColor = "transparent";
+              fileName.style.color = "black"
+              //als venster word gesloten dan verdwijnt hij in de taakbalk.
+              // minimize.style.display ="none";
+            });
+          } else {
+            view.style.display = "none";
+            view.classList.remove("bovenop");
+          }
         }
       });
 
-      const minimizeButton = document.querySelector(".minimize");
-      minimizeButton.addEventListener("click", () => {
-
-      });
+      // const minimizeButton = document.querySelector(".minimize");
+      // minimizeButton.addEventListener("click", () => {
+      //
+      // });
 
       //when icon is double clicked open the right view
       // little help from copilot
@@ -327,8 +375,8 @@ const createIcon = async () => {
         // console.log(imgContainer.id);
         const view = document.getElementById(imgContainer.id);
         view.style.display = "block";
-        view.style.zIndex = z;
-        z++;
+        // view.style.zIndex = z;
+        // z++;
 
       });
     });

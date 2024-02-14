@@ -131,11 +131,13 @@ pre {
   overflow: scroll;
 }
 .minimize {
-  display: none;
+  display: flex;
   margin-top:3px;
   margin-left:7px;
   background: #c0c0c0;
   padding: 4px 10px;
+  gap: 0.25em;
+  align-items: center;
   border: none;
   height:26px;
   box-shadow:
@@ -143,6 +145,7 @@ pre {
           0 0 0 1px #808080,
           -0.5px -0.5px 0 1.5px #ffffff,
           0 0 0 2px #0a0a0a;
+  flex-direction: row-reverse;
 }
 .minimize > img  {
   font-size:0;
@@ -172,6 +175,11 @@ button.minimize:focus {
   outline-offset: -2px;
 }
 
-img#avatarminimize {
+button.minimize img {
   width:20px;
+}
+
+
+.bovenop {
+  z-index:10;
 }
