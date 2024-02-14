@@ -2,9 +2,21 @@
 const senaData = async () => {
   try {
     const data = await fetch(
-      "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json")
-      .then((res) => res.json()
-    );
+        "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json"
+    ).then((res) => res.json());
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+//fetch Sena Data
+const fayaazData = async () => {
+  try {
+    const data = await fetch(
+        "https://raw.githubusercontent.com/Fayaaz036/WAPS/master/data.json"
+    ).then((res) => res.json());
     // console.log(data);
     return data;
   } catch (error) {
@@ -15,187 +27,263 @@ const senaData = async () => {
 //fetch Niels data
 const nielsData = async () => {
   try {
-    const data = await fetch ("https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json")
-    .then((res) => res.json());
-    console.log(data)
+    const data = await fetch(
+        "https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json"
+    ).then((res) => res.json());
+    // console.log(data)
     return data;
-  } catch (error){
+  } catch (error) {
     console.error("Error fetching data:", error);
   }
-}
+};
 
-async function fetchData() {
+// fetch Ali data
+const aliData = async () => {
   try {
-    const response = await fetch('https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/about.json');
-    const data = await response.json();
+    const data = await fetch('https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json')
+        .then((res) => res.json());
 
-    // Update card elements with data from JSON
-    updateCardData(data);
+    // console.log(data);
+    return data;
   } catch (error) {
-    console.error('Error in JSON', error);
+    console.error("Error fetching data:", error);
   }
-}
+};
 
-// this is by copilot 
-// put niels data and sena data in one array
+// fetch Ufuk data
+const ufukData = async () => {
+  try {
+    const data = await fetch('https://raw.githubusercontent.com/h1bba/web-app-from-scratch-2324/main/data/info.json')
+        .then((res) => res.json());
+
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+// this is by copilot
+// put members data in one array
 const combineFunction = async () => {
-  const combinedData = await Promise.all([senaData(), nielsData()]); console.log(combinedData);
+  try{
+    const combinedData = await Promise.all([senaData(), nielsData(), aliData(), ufukData(), fayaazData()]);
 
-}
+    console.log(combinedData);
 
-combineFunction();
+    return combinedData;
+  } catch (error){
+    console.error("Error combining data:", error);
+  }
+};
+
+let z = 1;
 
 const createViewElements = async () => {
-  // turn data into json
-  const data = await senaData();
+  try{
+    const data = await combineFunction();
+    // console.log(data);
 
-  // stringify json
-  const senaJson = JSON.stringify(data, null, 2);
+    data.forEach((member) => {
+      const dataString = JSON.stringify(member, null, 2);
 
-  // create section element (view)
-  const view = document.createElement("section");
-  view.classList.add("view");
+      // create section element (view)
+      const view = document.createElement("section");
+      view.classList.add("view");
+      view.id = member.firstName;
 
-  // create section element (title)
-  const title = document.createElement("section");
-  title.classList.add("title");
+      // create section element (title)
+      const title = document.createElement("section");
+      title.classList.add("title");
 
-  // create h2 element
-  const pathName = document.createElement("h2");
-  pathName.innerHTML = `C:\\Windows\\system32\\${data.firstName}.exe`;
+      // create h2 element
+      const pathName = document.createElement("h2");
+      pathName.innerHTML = `C:\\Windows\\system32\\${member.firstName}.exe`;
 
-  // create div element (buttonContainer)
-  const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("buttonContainer");
+      // create div element (buttonContainer)
+      const buttonContainer = document.createElement("div");
+      buttonContainer.classList.add("buttonContainer");
 
-  //create button (minusButton)
-  const minusButton = document.createElement("button");
+      //create button (minusButton)
+      const minusButton = document.createElement("button");
 
-  //create button (fillButton)
-  const fillButton = document.createElement("button");
+      //create button (fillButton)
+      const fillButton = document.createElement("button");
 
-  //create button (closeButton)
-  const closeButton = document.createElement("button");
+      //create button (closeButton)
+      const closeButton = document.createElement("button");
 
-  //create image (minusImage)
-  const minusImage = document.createElement("img");
-  minusImage.src = "./assets/minButton.png";
-  minusImage.alt = "minus button";
+      //create image (minusImage)
+      const minusImage = document.createElement("img");
+      minusImage.src = "./assets/minButton.png";
+      minusImage.alt = "minus button";
 
-  //create image (fillImage)
-  const fillImage = document.createElement("img");
-  fillImage.src = "./assets/fillButton.png";
-  fillImage.alt = "fill button";
+      //create image (fillImage)
+      const fillImage = document.createElement("img");
+      fillImage.src = "./assets/fillButton.png";
+      fillImage.alt = "fill button";
 
-  //create image (closeImage)
-  const closeImage = document.createElement("img");
-  closeImage.src = "./assets/closeButton.png";
-  closeImage.alt = "close button";
+      //create image (closeImage)
+      const closeImage = document.createElement("img");
+      closeImage.src = "./assets/closeButton.png";
+      closeImage.alt = "close button";
 
-  // create article element (dataContainer)
-  const dataContainer = document.createElement("article");
-  dataContainer.classList.add("dataContainer");
+      // create article element (dataContainer)
+      const dataContainer = document.createElement("article");
+      dataContainer.classList.add("dataContainer");
 
-  const userData = document.createElement("pre");
-  userData.innerHTML = senaJson;
+      const userData = document.createElement("pre");
+      userData.innerHTML = dataString;
 
-  //put image in buttons
-  minusButton.appendChild(minusImage);
-  fillButton.appendChild(fillImage);
-  closeButton.appendChild(closeImage);
+      //put image in buttons
+      minusButton.appendChild(minusImage);
+      fillButton.appendChild(fillImage);
+      closeButton.appendChild(closeImage);
 
-  //put userData in dataContainer
-  dataContainer.appendChild(userData);
+      //put userData in dataContainer
+      dataContainer.appendChild(userData);
 
-  //put pathname and buttons in title
-  title.appendChild(pathName);
-  title.appendChild(buttonContainer);
+      //put pathname and buttons in title
+      title.appendChild(pathName);
+      title.appendChild(buttonContainer);
 
-  //put buttons in button container
-  buttonContainer.appendChild(minusButton);
-  buttonContainer.appendChild(fillButton);
-  buttonContainer.appendChild(closeButton);
+      //put buttons in button container
+      buttonContainer.appendChild(minusButton);
+      buttonContainer.appendChild(fillButton);
+      buttonContainer.appendChild(closeButton);
 
-  view.appendChild(title);
-  view.appendChild(dataContainer);
+      view.appendChild(title);
+      view.appendChild(dataContainer);
 
-  const main = document.querySelector("main");
-  main.appendChild(view);
+      const main = document.querySelector("main");
+      main.appendChild(view);
+
+      //give view random position
+
+      const randomLeft = Math.floor(Math.random() * 49);
+      const randomTop = Math.floor(Math.random() *38);
+
+      view.style.left = `${randomLeft}%`;
+      view.style.top = `${randomTop}%`;
+
+      // when close button pressed close the right view
+      //little help from copilot
+      closeButton.addEventListener("click", () => {
+        view.style.display = "none";
+      });
+
+      // when view is clicked bring to front
+      view.addEventListener("click", () => {
+        //z index + 1
+        view.style.zIndex = z;
+        z++;
+      });
 
 
-  closeButton.addEventListener("click", closeView);
-  fillButton.addEventListener("click", fillView);
+      // when fill button is pressed fill the right view
+      let isFull = false;
 
+      fillButton.addEventListener("click", () => {
+        if (isFull === false) {
+          //find the right view and dataContainer
+          const view = document.getElementById(member.firstName);
+          const dataContainer = document
+              .getElementById(member.firstName)
+              .querySelector(".dataContainer");
 
+          isFull = true;
+          console.log(isFull);
 
+          dataContainer.style.height = "100vh";
+          dataContainer.style.width = "99vw";
+          view.style.left = "0";
+          view.style.top = "0";
+          // console.log(member.firstName);
+        } else {
+          //find the right view and dataContainer
+          const view = document.getElementById(member.firstName);
+          const dataContainer = document
+              .getElementById(member.firstName)
+              .querySelector(".dataContainer");
+
+          isFull = false;
+          console.log(isFull);
+
+          dataContainer.style.height = "50vh";
+          dataContainer.style.width = "50vw";
+
+          const randomLeft = Math.floor(Math.random() * 49);
+          const randomTop = Math.floor(Math.random() * 38);
+
+          view.style.left = `${randomLeft}%`;
+          view.style.top = `${randomTop}%`;
+        }
+      });
+    });
+  } catch (error){
+    console.error("Error creating view elements:", error);
+  }
 };
 
 const createIcon = async () => {
-  const data = await senaData();
-  console.log(data.avatar_url);
+  try{
+    const data = await combineFunction();
+    // console.log(data[1].firstName);
 
-  
-  const imgContainer = document.createElement("article");
-  imgContainer.classList.add("imgContainer");
-  imgContainer.id = data.firstName;
+    data.forEach((member) => {
+      console.log(member.avatar_url);
 
-  const avatar = document.createElement("img");
-  avatar.src = data.avatar_url;
-  avatar.alt = "avatar";
-  avatar.classList.add("avatar");
+      const imgContainer = document.createElement("article");
+      imgContainer.classList.add("imgContainer");
+      imgContainer.id = member.firstName;
 
-  const fileName = document.createElement('p')
-  fileName.classList.add("fileName")
-  fileName.innerHTML = `${data.firstName}.exe`;
+      const avatar = document.createElement("img");
+      avatar.src = member.avatar_url;
+      avatar.alt = "avatar";
+      avatar.classList.add("avatar");
 
-  imgContainer.appendChild(avatar);
-  imgContainer.appendChild(fileName);
+      const fileName = document.createElement("p");
+      fileName.classList.add("fileName");
+      fileName.innerHTML = `${member.firstName}.exe`;
 
-  const main = document.querySelector("main");
-  main.appendChild(imgContainer);
+      imgContainer.appendChild(avatar);
+      imgContainer.appendChild(fileName);
 
+      const main = document.querySelector("main");
+      main.appendChild(imgContainer);
 
-  document.getElementById("Sena").addEventListener("dblclick", openView);
+      //random position for the icon
+      // little help from copilot
+      const randomLeft = Math.floor(Math.random() * 75);
+      const randomTop = Math.floor(Math.random() * 75);
 
-}
+      imgContainer.style.left = `${randomLeft}%`;
+      imgContainer.style.top = `${randomTop}%`;
 
-createIcon();
-createViewElements();
+      const startButton = document.querySelector("#startButton");
+      startButton.addEventListener("click", () => {
+        const randomLeft = Math.floor(Math.random() * 75);
+        const randomTop = Math.floor(Math.random() * 75);
 
+        imgContainer.style.left = `${randomLeft}%`;
+        imgContainer.style.top = `${randomTop}%`;
+      });
 
-const openView = async () => {
-  const view = document.querySelector(".view")
-  //make view display auto
+      //when icon is double clicked open the right view
+      // little help from copilot
+      imgContainer.addEventListener("dblclick", () => {
+        // console.log(imgContainer.id);
+        const view = document.getElementById(imgContainer.id);
+        view.style.display = "block";
+        view.style.zIndex = z;
+        z++;
 
-  view.style.display = "block";
-}
-
-const closeView = async () => {
-  const view = document.querySelector(".view");
-  view.style.display = "none";
-  console.log("check")
-}
-
-let isFull = false;
-
-const fillView = async () => {
-  const view = document.querySelector(".view");
-
-  if (isFull === false){
-    view.style.width = "100vw";
-    view.style.height = "100vh";
-    view.style.maxWidth = "100vw";
-    view.style.maxHeight = "100vh";
-
-    isFull = true;
-  } else {
-    view.style.width = "50vw";
-    view.style.height = "50vh";
-    view.style.maxWidth = "50vw";
-    view.style.maxHeight = "50vh";
-    isFull = false;
+      });
+    });
+  } catch (error){
+    console.error("Error creating icon:", error);
   }
+};
 
-  console.log(isFull)
-
-}
+createViewElements();
+createIcon();
