@@ -1,3 +1,25 @@
+function updateDateTime() {
+  const now = new Date();
+
+  // Update time
+  //padstart zorgt er voor dat er 2 getallen komen te staan, bijvoorbeeld niet de /2/ maand maar /02/
+  const hours = now.getHours().toString().padStart(2, "0");
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  const timeString = `${hours}:${minutes}`;
+  document.getElementById("time").textContent = timeString;
+
+  // Update date
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  const dateString = now.toLocaleDateString("en-NL", options);
+  document.getElementById("date").textContent = dateString;
+}
+
+// Update date and time every second
+setInterval(updateDateTime, 1000);
+
+// Initial update
+updateDateTime();
+
 //fetch Sena Data
 const senaData = async () => {
   try {
