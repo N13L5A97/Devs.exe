@@ -24,7 +24,7 @@ const nielsData = async () => {
   }
 };
 
-
+//fetch Ali Data
 const aliData = async () => {
   try {
     const data = await fetch('https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json')
