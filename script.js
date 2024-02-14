@@ -11,7 +11,7 @@ const senaData = async () => {
   }
 };
 
-//fetch Sena Data
+//fetch Fayaaz Data
 const fayaazData = async () => {
   try {
     const data = await fetch(
@@ -276,7 +276,7 @@ const createIcon = async () => {
           container.style.backgroundColor = "transparent";
           container.style.border = "transparent";
           fileName.style.color = "black"
-          fileName.backgroundColor = "transparent"
+          fileName.backgroundColor = "none"
 
         }
       });
