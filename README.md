@@ -522,7 +522,7 @@ const createViewElements = async () => {
 
 ```
 
-## Close and Maximize View
+## Close, Minimizing and Maximize View
 Event listeners are added to the close and maximize buttons within each view element. When the close button is clicked, the corresponding view is hidden. When the fill button is clicked, the view is maximized to fill the entire viewport, and clicking it again restores it to its original size with random positioning.
 
 ### Maximize
@@ -595,6 +595,76 @@ const closeButton = document.createElement("button");
         z++;
       });
 ```
+## Minimizing
+To minimize a view and put them into the start menu just like how windows operates, we made this button into an object that is being placed into the footer to 
+recreate the minimizing effect. 
+```JS
+// hiding the view when clicking minimize button. 
+const minusButton = document.createElement("button");
+      minusButton.addEventListener("click", () => {
+        view.style.display = "none";
+      })
+```
+
+```JS
+
+//creating and linking the button to the corrosponding person being clicked. 
+      imgContainer.addEventListener("dblclick", (event) => {
+        event.stopPropagation();
+
+        const viewId = imgContainer.id;
+        const view = document.getElementById(viewId);
+
+        const footer = document.querySelector("footer");
+        const button = document.createElement("button");
+
+        const avatar = imgContainer.querySelector("img");
+        const miniavatar = document.createElement("img");
+        miniavatar.src = avatar.src;
+        button.dataset.id = viewId;
+        button.textContent = viewId;
+        button.appendChild(miniavatar);
+        button.classList.add("minimize");
+
+        button.addEventListener("click", () => {
+          toggleDialog();
+        });
+        footer.appendChild(button);
+```
+```JS
+
+//making the function of choosing the right process in footer and prioritize view with z index
+        function toggleDialog() {
+          console.log(view);
+
+          if (view.style.display !== "block") {
+            const degeneDieNuBovenopLigt = document.querySelector(".bovenop");
+            if(degeneDieNuBovenopLigt) {
+              degeneDieNuBovenopLigt.classList.remove("bovenop");
+            }
+
+            view.classList.add("bovenop");
+
+
+            view.style.display = "block";
+            // When the window is closed, set the background of the imgContainer back to transparent
+            view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
+              imgContainer.style.backgroundColor = "transparent";
+              fileName.style.backgroundColor = "transparent";
+              fileName.style.color = "black"
+              //als venster word gesloten dan verdwijnt hij in de taakbalk.
+              // minimize.style.display ="none";
+            });
+          } else {
+            view.style.display = "none";
+            view.classList.remove("bovenop");
+          }
+        }
+      });
+
+```
+
+
 
 ## Opening View
 Event listeners are added to each view element to bring it to the front when clicked, updating its z-index. Additionally, double-clicking on an icon opens the corresponding view, ensuring that it's displayed on top of other elements.
