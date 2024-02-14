@@ -272,49 +272,49 @@ const createIcon = async () => {
         imgContainer.style.top = `${randomTop}%`;
       });
 
-        // Ali's added function 
-    imgContainer.addEventListener("click", () => {
-      const selectedContainers = document.querySelectorAll(".imgContainer");
-      selectedContainers.forEach(container => {
-        if (container !== imgContainer) {
-          container.style.backgroundColor = "transparent";
-          container.style.border = "transparent";
-          fileName.style.color = "black"
-          fileName.backgroundColor = "transparent"
+      // Ali's added function
+      imgContainer.addEventListener("click", () => {
+        const selectedContainers = document.querySelectorAll(".imgContainer");
+        selectedContainers.forEach(container => {
+          if (container !== imgContainer) {
+            container.style.backgroundColor = "transparent";
+            container.style.border = "transparent";
+            fileName.style.color = "black"
+            fileName.backgroundColor = "transparent"
 
+          }
+        });
+        imgContainer.style.backgroundColor = "#00007b";
+        imgContainer.style.border = "dashed 1px white";
+        fileName.style.backgroundColor = "#00007b";
+        fileName.style.color = "white";
+      });
+
+      // Event listener added for double clicking
+      imgContainer.addEventListener("dblclick", (event) => {
+        event.stopPropagation();
+
+        const viewId = imgContainer.id;
+        const view = document.getElementById(viewId);
+        const minimize = document.querySelector(".minimize");
+        const minimizetext = document.querySelector(".minimizetext");
+        const minimizepic = document.querySelector("img#avatarminimize");
+        minimize.style.display ="flex";
+        minimizepic.src = `${member.avatar_url}`;
+        minimizetext.innerHTML =` ${member.firstName}.exe`;
+
+        // See if the window is already open, if not, open it
+        if (view.style.display !== "block") {
+          view.style.display = "block";
+          // When the window is closed, set the background of the imgContainer back to transparent
+          view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
+            imgContainer.style.backgroundColor = "transparent";
+            fileName.style.backgroundColor = "transparent";
+            fileName.style.color = "black"
+            minimize.style.display ="none";
+          });
         }
       });
-      imgContainer.style.backgroundColor = "#00007b";
-      imgContainer.style.border = "dashed 1px white";
-      fileName.style.backgroundColor = "#00007b";
-      fileName.style.color = "white";
-    });
-
-    // Event listener added for double clicking
-    imgContainer.addEventListener("dblclick", (event) => {
-      event.stopPropagation(); 
-
-      const viewId = imgContainer.id;
-      const view = document.getElementById(viewId);
-      const minimize = document.querySelector(".minimize");
-      const minimizetext = document.querySelector(".minimizetext");
-      const minimizepic = document.querySelector("img#avatarminimize");
-      minimize.style.display ="flex";
-      minimizepic.src = `${member.avatar_url}`;
-      minimizetext.innerHTML =` ${member.firstName}.exe`;
-
-      // See if the window is already open, if not, open it
-      if (view.style.display !== "block") {
-        view.style.display = "block";
-        // When the window is closed, set the background of the imgContainer back to transparent
-        view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
-          imgContainer.style.backgroundColor = "transparent";
-          fileName.style.backgroundColor = "transparent";
-          fileName.style.color = "black"
-          minimize.style.display ="none";
-        });
-      }
-    });
 
       const minimizeButton = document.querySelector(".minimize");
       minimizeButton.addEventListener("click", () => {
