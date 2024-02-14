@@ -243,7 +243,7 @@ const createIcon = async () => {
     imgContainer.addEventListener("dblclick", (event) => {
 
       const viewId = imgContainer.id;
-      const view = document.getElementById(viewId);
+      const view = document.querySelector(".view").getElementById(viewId);
       view.style.zIndex = z;
       z++;
 
