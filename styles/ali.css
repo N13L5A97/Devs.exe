@@ -130,3 +130,48 @@ button:active {
 pre {
   overflow: scroll;
 }
+.minimize {
+  display: none;
+  margin-top:3px;
+  margin-left:7px;
+  background: #c0c0c0;
+  padding: 4px 10px;
+  border: none;
+  height:26px;
+  box-shadow:
+          -0.5px -0.5px 0 0.5px #c0c0c0,
+          0 0 0 1px #808080,
+          -0.5px -0.5px 0 1.5px #ffffff,
+          0 0 0 2px #0a0a0a;
+}
+.minimize > img  {
+  font-size:0;
+}
+.minimize > p  {
+  margin-top:1px;
+
+  margin-left:10px;
+}
+
+
+button.minimize:active {
+  box-shadow:
+          -0.5px -0.5px 0 0.5px #808080,
+          0 0 0 1px #c0c0c0,
+          -0.5px -0.5px 0 1.5px #0a0a0a,
+          0 0 0 2px #ffffff;
+}
+
+button.minimize:disabled {
+  color: #9a9a9a;
+  text-shadow: 1px 1px 0 #eeeeee;
+}
+
+button.minimize:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -2px;
+}
+
+img#avatarminimize {
+  width:20px;
+}
