@@ -252,7 +252,6 @@ const createIcon = async () => {
 
         view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
           imgContainer.classList.remove("fullScreen");
-          imgContainer.querySelector(".fileName").classList.add("fileName");
         });
       }
     });
