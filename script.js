@@ -156,7 +156,7 @@ const createViewElements = async () => {
       const dataContainer = document.createElement("article");
       dataContainer.classList.add("dataContainer");
 
-      // const userData = document.createElement("pre");
+      const userData = document.createElement("pre");
       userData.innerHTML = dataString;
 
       minusButton.appendChild(minusImage);
