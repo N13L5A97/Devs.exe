@@ -1,5 +1,4 @@
 function updateDateTime() {
-  console.log('test')
   const now = new Date();
 
   // Update time
