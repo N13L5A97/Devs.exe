@@ -1,9 +1,9 @@
-// fetch Sena Data
+//fetch Sena Data
 const senaData = async () => {
   try {
-    const data = await fetch("https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json").then((res) =>
-      res.json()
-    );
+    const data = await fetch(
+        "https://raw.githubusercontent.com/Sensinki/web-app-from-scratch-2324/main/docs/assets/script/about.json"
+    ).then((res) => res.json());
     // console.log(data);
     return data;
   } catch (error) {
@@ -11,10 +11,12 @@ const senaData = async () => {
   }
 };
 
-// fetch Fayaaz Data
+//fetch Fayaaz Data
 const fayaazData = async () => {
   try {
-    const data = await fetch("https://raw.githubusercontent.com/Fayaaz036/WAPS/master/data.json").then((res) => res.json());
+    const data = await fetch(
+        "https://raw.githubusercontent.com/Fayaaz036/WAPS/master/data.json"
+    ).then((res) => res.json());
     // console.log(data);
     return data;
   } catch (error) {
@@ -22,12 +24,12 @@ const fayaazData = async () => {
   }
 };
 
-// fetch Niels data
+//fetch Niels data
 const nielsData = async () => {
   try {
-    const data = await fetch("https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json").then((res) =>
-      res.json()
-    );
+    const data = await fetch(
+        "https://raw.githubusercontent.com/N13L5A97/web-app-from-scratch-2324/main/public/assets/data/data.json"
+    ).then((res) => res.json());
     // console.log(data)
     return data;
   } catch (error) {
@@ -38,43 +40,44 @@ const nielsData = async () => {
 // fetch Ali data
 const aliData = async () => {
   try {
-    const data = await fetch("https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json").then((res) =>
-      res.json()
-    );
+    const data = await fetch('https://raw.githubusercontent.com/AliAhmed205/web-app-from-scratch-2324/main/docs/scripts/data.json')
+        .then((res) => res.json());
 
-        // console.log(data);
-        return data;
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
 
 // fetch Ufuk data
 const ufukData = async () => {
   try {
-    const data = await fetch("https://raw.githubusercontent.com/h1bba/web-app-from-scratch-2324/main/data/info.json").then((res) => res.json());
+    const data = await fetch('https://raw.githubusercontent.com/h1bba/web-app-from-scratch-2324/main/data/info.json')
+        .then((res) => res.json());
 
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
 
 // this is by copilot
 // put members data in one array
 const combineFunction = async () => {
-  try {
+  try{
     const combinedData = await Promise.all([senaData(), nielsData(), aliData(), ufukData(), fayaazData()]);
 
-        console.log(combinedData);
+    console.log(combinedData);
 
     return combinedData;
-  } catch (error) {
+  } catch (error){
     console.error("Error combining data:", error);
   }
 };
 
+let z = 1;
 
 const createViewElements = async () => {
   const data = await combineFunction();
@@ -97,13 +100,8 @@ const createViewElements = async () => {
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("buttonContainer");
 
-    //create button (minusButton)
     const minusButton = document.createElement("button");
-
-    //create button (fillButton)
     const fillButton = document.createElement("button");
-
-    //create button (closeButton)
     const closeButton = document.createElement("button");
 
     const minusImage = document.createElement("img");
@@ -143,10 +141,8 @@ const createViewElements = async () => {
     const main = document.querySelector("main");
     main.appendChild(view);
 
-    //give view random position
-
     const randomLeft = Math.floor(Math.random() * 49);
-    const randomTop = Math.floor(Math.random() * 38);
+    const randomTop = Math.floor(Math.random() *38);
 
     view.style.left = `${randomLeft}%`;
     view.style.top = `${randomTop}%`;
@@ -156,29 +152,36 @@ const createViewElements = async () => {
     });
 
     view.addEventListener("click", () => {
-      view.style.zIndex++;
+      view.style.zIndex = z;
+      z++;
     });
 
     let isFull = false;
 
     fillButton.addEventListener("click", () => {
-        if (isFull === false) {
-          //find the right view and dataContainer
-          const view = document.getElementById(member.firstName);
-          const dataContainer = document
-              .getElementById(member.firstName)
-              .querySelector(".dataContainer");
+      if (isFull === false) {
+        //find the right view and dataContainer
+        const view = document.getElementById(member.firstName);
+        const dataContainer = document
+          .getElementById(member.firstName)
+          .querySelector(".dataContainer");
+
+        isFull = true;
+        console.log(isFull);
 
         dataContainer.style.height = "100vh";
         dataContainer.style.width = "99vw";
         view.style.left = "0";
         view.style.top = "0";
-        isFull = true;
+        view.style.zIndex = z;
+        z++;
         // console.log(member.firstName);
       } else {
         //find the right view and dataContainer
         const view = document.getElementById(member.firstName);
-        const dataContainer = document.getElementById(member.firstName).querySelector(".dataContainer");
+        const dataContainer = document
+          .getElementById(member.firstName)
+          .querySelector(".dataContainer");
 
         isFull = false;
         console.log(isFull);
@@ -191,22 +194,18 @@ const createViewElements = async () => {
 
         view.style.left = `${randomLeft}%`;
         view.style.top = `${randomTop}%`;
-
       }
     });
   });
 };
 
 const createIcon = async () => {
-  try{
   const data = await combineFunction();
 
-    data.forEach((member) => {
-      console.log(member.avatar_url);
-
-            const imgContainer = document.createElement("article");
-            imgContainer.classList.add("imgContainer");
-            imgContainer.id = member.firstName;
+  data.forEach((member) => {
+    const imgContainer = document.createElement("article");
+    imgContainer.classList.add("imgContainer");
+    imgContainer.id = member.firstName;
 
     const avatar = document.createElement("img");
     avatar.src = member.avatar_url;
@@ -242,34 +241,32 @@ const createIcon = async () => {
     });
 
     imgContainer.addEventListener("dblclick", (event) => {
-      event.stopPropagation();
 
       const viewId = imgContainer.id;
       const view = document.getElementById(viewId);
+      view.style.zIndex = z;
+      z++;
 
       if (view.style.display !== "block") {
         view.style.display = "block";
 
         view.querySelector(".buttonContainer button:last-child").addEventListener("click", () => {
           imgContainer.classList.remove("fullScreen");
-          imgContainer.querySelector(".fileName").classList.add("fileName");
         });
       }
     });
 
-    //when icon is double clicked open the right view
-    // little help from copilot
-    imgContainer.addEventListener("dblclick", () => {
-      // console.log(imgContainer.id);
-      const view = document.getElementById(imgContainer.id);
-      view.style.display = "block";
-      view.style.zIndex = z;
-      z++;
+    const startButton = document.querySelector("#startButton");
+    startButton.addEventListener("click", () => {
+
+      console.log("start button is clicked")
+      const randomLeft = Math.floor(Math.random() * 75);
+      const randomTop = Math.floor(Math.random() * 75);
+
+      imgContainer.style.left = `${randomLeft}%`;
+      imgContainer.style.top = `${randomTop}%`;
     });
   });
-} catch (error) {
-  console.error("Error creating icon:", error);
-}
 };
 
 createViewElements();
